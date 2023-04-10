@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aerrahim <aerrahim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:06:04 by aerrahim          #+#    #+#             */
+/*   Updated: 2023/04/10 00:55:47 by aerrahim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -23,7 +35,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*read_line(int fd)
+char	*read_line(int fd, char **hold)
 {
 	int		offset;
 	char	*line;
@@ -38,7 +50,11 @@ char	*read_line(int fd)
 	{
 		offset = read(fd, tmp0, BUFFER_SIZE);
 		if (offset < 0)
+		{
+			free(*hold);
+			*hold = NULL;
 			return (free(tmp0), NULL);
+		}
 		if (offset == 0)
 			break ;
 		tmp0[offset] = '\0';
@@ -101,7 +117,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = read_line(fd);
+	line = read_line(fd, &hold);
 	if (hold)
 	{
 		tmp = line;
@@ -113,9 +129,8 @@ char	*get_next_line(int fd)
 	if (line && ft_strchr(line, '\n'))
 	{
 		if (ft_strlen(line) > 1)
-			hold = get_rest_line(line);
+		hold = get_rest_line(line);
 		line = get_current_line(line);
 	}
 	return (line);
 }
-
