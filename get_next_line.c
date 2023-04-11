@@ -40,7 +40,7 @@ char	*read_line(int fd, char **hold)
 	int		offset;
 	char	*line;
 	char	*tmp0;
-	char	*tmp1;
+	// char	*tmp1;
 
 	line = NULL;
 	tmp0 = malloc(BUFFER_SIZE + 1);
@@ -58,11 +58,11 @@ char	*read_line(int fd, char **hold)
 		if (offset == 0)
 			break ;
 		tmp0[offset] = '\0';
-		tmp1 = line;
+		// tmp1 = line;
 		line = ft_strjoin(line, tmp0);
 		if (!line)
-			return (free(tmp0), free(tmp1), NULL);
-		free(tmp1);
+			return (free(tmp0), NULL);
+		// free(tmp1);
 	}
 	return (free(tmp0), line);
 }
@@ -83,7 +83,7 @@ char	*get_rest_line(char *hold)
 		hold0 = malloc(ft_strlen(hold) - nl + 1);
 		while (hold[++nl])
 			hold0[i++] = hold[nl];
-			hold0[i] = 0;
+		hold0[i] = 0;
 	}
 	return (hold0);
 }
@@ -103,7 +103,7 @@ char	*get_current_line(char *line)
 		if (!str)
 			return (free(line), NULL);
 		ft_memcpy(str, line, nl + 1);
-		str[nl + 1] = 0;
+		str[nl + 1] = '\0';
 	}
 	return (free(line), str);
 }
@@ -116,7 +116,7 @@ char	*get_next_line(int fd)
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (line);
 	line = read_line(fd, &hold);
 	if (hold)
 	{

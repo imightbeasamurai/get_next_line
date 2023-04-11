@@ -17,9 +17,9 @@
 #  define BUFFER_SIZE	24
 # endif
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <fcntl.h>
 
 int		ft_strchr(char *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
