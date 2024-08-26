@@ -12,11 +12,11 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char *ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
-	int		len0;
-	int		len1;
+	char *str;
+	int len0;
+	int len1;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -29,17 +29,17 @@ char	*ft_strjoin(char *s1, char *s2)
 	str = (char *)malloc(len0 + len1 + 1);
 	if (!str)
 		return (NULL);
-	ft_memcpy (str, s1, len0);
-	ft_memcpy (str + len0, s2, len1);
+	ft_memcpy(str, s1, len0);
+	ft_memcpy(str + len0, s2, len1);
 	str[len0 + len1] = '\0';
 	return (str);
 }
 
-char	*read_line(int fd, char **hold)
+char *read_line(int fd, char **hold)
 {
-	int		offset;
-	char	*line;
-	char	*tmp0;
+	int offset;
+	char *line;
+	char *tmp0;
 	// char	*tmp1;
 
 	line = NULL;
@@ -56,7 +56,7 @@ char	*read_line(int fd, char **hold)
 			return (free(tmp0), NULL);
 		}
 		if (offset == 0)
-			break ;
+			break;
 		tmp0[offset] = '\0';
 		// tmp1 = line;
 		line = ft_strjoin(line, tmp0);
@@ -67,11 +67,11 @@ char	*read_line(int fd, char **hold)
 	return (free(tmp0), line);
 }
 
-char	*get_rest_line(char *hold)
+char *get_rest_line(char *hold)
 {
-	int		nl;
-	int		i;
-	char	*hold0;
+	int nl;
+	int i;
+	char *hold0;
 
 	nl = 0;
 	i = 0;
@@ -88,10 +88,10 @@ char	*get_rest_line(char *hold)
 	return (hold0);
 }
 
-char	*get_current_line(char *line)
+char *get_current_line(char *line)
 {
-	char	*str;
-	int		nl;
+	char *str;
+	int nl;
 
 	str = NULL;
 	nl = 0;
@@ -108,11 +108,11 @@ char	*get_current_line(char *line)
 	return (free(line), str);
 }
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	*hold;
-	char		*tmp;
-	char		*line;
+	static char *hold;
+	char *tmp;
+	char *line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -129,7 +129,7 @@ char	*get_next_line(int fd)
 	if (line && ft_strchr(line, '\n'))
 	{
 		if (ft_strlen(line) > 1)
-		hold = get_rest_line(line);
+			hold = get_rest_line(line);
 		line = get_current_line(line);
 	}
 	return (line);

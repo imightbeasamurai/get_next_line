@@ -12,9 +12,9 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t ft_strlen(char *str)
 {
-	size_t	i;
+	size_t i;
 
 	if (!str)
 		return (0);
@@ -24,9 +24,9 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strchr(char *str, char c)
+int ft_strchr(char *str, char c)
 {
-	int	i;
+	int i;
 
 	if (!str)
 		return (0);
@@ -38,9 +38,9 @@ int	ft_strchr(char *str, char c)
 	return (0);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void *ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	l;
+	size_t l;
 
 	l = n;
 	if (!dst && !src)
@@ -52,10 +52,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst - l);
 }
 
-char	*ft_strdup(char *dup)
+char *ft_strdup(char *dup)
 {
-	char	*str;
-	size_t	i;
+	char *str;
+	size_t i;
 
 	i = ft_strlen(dup);
 	str = (char *)malloc(i + 1);
